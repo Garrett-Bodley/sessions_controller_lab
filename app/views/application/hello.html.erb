@@ -1,5 +1,10 @@
-<h1>Hi, <%= session[:name] %>.</h1>
-<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-  <input type=submit value='logout'>
+<% flash.each do |name, msg| -%>
+  <%= content_tag :div, msg, class: name %>
+<% end -%>
+
+<% if session[:name].blank? %>
+  <%= link_to "Please Log In", login_path%>
+<% else %>
+  <%= render "welcome" %>
 <% end %>
 
